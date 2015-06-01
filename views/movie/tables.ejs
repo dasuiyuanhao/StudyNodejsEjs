@@ -38,9 +38,15 @@
         <div id="tableContainer">
           <table class="table table-condensed table-hover">
             <!--<tr><th>Id</th>-->
-            <th>名称</th><th>发布时间</th><th>来源</th>
-            <th>内容</th><th>创建时间</th></tr>
-            <tr ng-repeat="movie in movies">
+            <thead>
+              <tr>
+                <th>名称</th><th>发布时间</th><th>来源</th>
+                <th>内容</th><th>创建时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="movie in movies">
               <!--<td>{{movie._id}}</td>-->
               <td  style="min-width: 100px">{{movie.name}}</td>
               <td>{{ movie.publish.replace("T","")}}</td>
@@ -51,7 +57,13 @@
                 <small class="text-left" style="max-width: 500px">{{movie.alias}}</small>
               </td>
               <td>{{movie.create_date}}</td>
+                <td>
+                  <input type="button" value="编辑" ng-click="editMovie(movie)" />
+                </td>
             </tr>
+            </tbody>
+
+
           </table>
         </div>
       </div>

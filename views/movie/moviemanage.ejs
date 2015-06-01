@@ -6,7 +6,7 @@
 <!--头部-->
 <% include ../shared/_layout_navbar.ejs %>
 
-<div class="container body-content">
+<div class="container body-content" ng-controller="bodyContentController">
     <div class="jumbotron">
         <h2>学习Mongodb增删改查</h2>
         <p class="lead">
@@ -39,8 +39,10 @@
     <!--编辑电影信息-->
     <div class="row">
         <div class="col-md-12">
+            <movieEditor>
+                <% include ../movie/movieEdit.ejs %>
+            </movieEditor>
 
-            <% include ../movie/movieEdit.ejs %>
         </div>
     </div>
 

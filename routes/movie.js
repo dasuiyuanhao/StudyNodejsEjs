@@ -48,30 +48,25 @@ router.get('/manage', function(req, res, next) {
     }
 });
 
-router.post('/add', function(req, res, next) {
+router.post('/addOrUpdate', function(req, res, next) {
     //res.send({'success':true});
     //console.log(req.body.content);
-    var jsonData ={};
+    var jsonData = {};
     //jsonData =new Object(req.body.content) ;
-    jsonData =req.body.content;
-    if(jsonData===undefined || !jsonData.name || jsonData.name==""){
-        var errMsg="提交的数据有问题";
+    jsonData = req.body.content;
+    if (jsonData === undefined || !jsonData.name || jsonData.name == "") {
+        var errMsg = "提交的数据有问题";
         console.log(errMsg);
-        return res.send({'success':false,'err':errMsg});
+        return res.send({'success': false, 'err': errMsg});
 
     }
-    if(jsonData._id){//update
-        //获取
-
-    } else {//insert
-        Movie.save(jsonData, function(err,data){
-            if(err) {
-                res.send({'success':false,'err':err});
-            } else {
-                res.send({'success':true,'data':data});
-            }
-        });
-    }
+    Movie.save(jsonData, function (err, data) {
+        if (err) {
+            res.send({'success': false, 'err': err});
+        } else {
+            res.send({'success': true, 'data': data});
+        }
+    });
 });
 
 //获取电影列表
@@ -119,5 +114,17 @@ function getSortObj(req){
     sort[field] = req.query.direction;
     return sort;
 };
+
+//获取某部电影
+router.get('/getMovie', function(req, res, next) {
+    var id=req.id;
+
+    if(!id || id==""){
+        return res.json(404, {msg: '没有查询到结果'});
+    }
+    Movie.getMovie(id , function(err,data){
+        return res.json(data);
+    });
+});
 
 module.exports = router;

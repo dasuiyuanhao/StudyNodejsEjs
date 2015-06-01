@@ -29,12 +29,41 @@ var Movie = mongodb.mongoose.model("Movie", MovieSchema);
 var MovieDAO = function(){};
 module.exports = new MovieDAO();
 
-
+//保存，新增或者更新
 MovieDAO.prototype.save = function(obj, callback) {
-    var instance = new Movie(obj);
-    instance.save(function(err){
-        callback(err,obj);
-    });
+    if(obj._id){//update
+        var jsonData=obj;
+        //获取数据库中数据
+        var query = Movie.findOne().where('_id', jsonData._id);
+        query.exec(function(err, doc) {
+            if(doc){
+                var query = doc.update({
+                    $set: {
+                        name: jsonData.name,
+                        publish: jsonData.publish,
+                        alias: jsonData.alias,
+                        images:jsonData.images,
+                        source:jsonData.source
+                    }
+                });
+                query.exec(function (err, results) {
+                    console.log("\n%d Documents updated", results);
+                    //Movie.findOne({word: 'gratifactions'}, function (err, doc) {
+                    //    console.log("\nAfter Update: ");
+                    //    console.log(doc.toJSON());
+                    //    mongoose.disconnect();
+                    //});
+                    callback(err, results);
+                });
+            }
+
+        });
+    }else{//insert
+        var instance = new Movie(obj);
+        instance.save(function (err) {
+            callback(err, obj);
+        });
+    }
 };
 
 //查询所有数据
@@ -80,5 +109,15 @@ MovieDAO.prototype.query = function(queryCondition,sort,pageIndex,pageSize, call
 
 };
 
+/*查询一条数据
+* */
+MovieDAO.prototype.getMovie = function(id, callback) {
+    var queryCondition={"_id":id};
+    var query = Movie.find(queryCondition);
+    //执行查询
+    query.findOne(function(err, data) {
+        callback(err, data);
+    });
 
+};
 

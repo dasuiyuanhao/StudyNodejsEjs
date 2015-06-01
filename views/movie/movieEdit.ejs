@@ -1,6 +1,7 @@
 <!--电影编辑-->
-<form id="movieEditor" role="form" method="POST" ng-controller="movieEditController" >
+<form id="movieEditor" role="form" method="POST" ng-controller="movieEditController">
   <h2>编辑电影信息</h2>
+  <input type="hidden" value="" ng-model="movie._id"  />
   <div class="form-group">
     <label for="name">名称</label>
     <input id="name" name="name" type="text" class="form-control" ng-model="movie.name" value=""
@@ -25,6 +26,8 @@
     <!--</label>-->
   <!--</div>-->
   <input type="button" class="btn btn-default" ng-click='submit()' value="提交" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="button" class="btn btn-default" ng-click='cancel()' value="取消" />
 </form>
 
 

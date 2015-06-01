@@ -23,7 +23,7 @@ $(function() {
             data.content = mdata;
             $.ajax({
                 type: "POST",
-                url: '/movie/add',
+                url: '/movie/addOrUpdate',
                 data: data,
                 success: function (data, textStatus){
                     if(data.success){
@@ -39,6 +39,9 @@ $(function() {
             });
         });
     };
+
+    //隐藏编辑框
+    $("#movieEditor").hide();
 });
 
 //获取电影列表
@@ -58,6 +61,19 @@ function GetAllData(){
 
 //查询绑定
 var app = angular.module('movieManageApp', []);
+//app中的公共内容
+app.factory('instance', function(){
+    return {};
+});
+//app中的主体内容
+app.controller('bodyContentController', function($scope, $http) {
+    //注册事件
+    //编辑电影
+    $scope.$on('requestEditMovieEvent', function (e,data) {
+        $scope.$broadcast('editMovieEvent',data);
+    });
+});
+
 app.controller('tableController', function($scope, $http) {
     $scope.movies = [];
     $scope.contains = '';
@@ -109,8 +125,24 @@ app.controller('tableController', function($scope, $http) {
             $scope.getMovies();
         }
     };
+    //编辑
+    $scope.editMovie = function(data) {
+        //angular.forEach(panes, function(pane) {
+        //    pane.selected = false;
+        //});
+        //data.selected = true;
+
+        var jqEditor=$("#movieEditor");
+        jqEditor.show().focus();
+        $("html,body").animate({scrollTop:jqEditor.offset().top},1000);
+        //基于事件的,往父辈发送事件
+        $scope.$emit('requestEditMovieEvent', data);
+
+    };
+
     $scope.getMovies();
 });
+
 //编辑内容
 app.controller('movieEditController', function($scope, $http) {
     $scope.movie = {
@@ -125,23 +157,35 @@ app.controller('movieEditController', function($scope, $http) {
         source :[],
         alias:""
     };
-    $scope.id = $scope.movie["_id"];
-    $scope.getMovie = function(){
-        if($scope.id && $scope.id!=""){
-            $http({url: '/getMovie', method: "GET",
-                params:{id:$scope.id}})
-                .success(function(data, status, headers, config) {
-                    $scope.movie = data;
-                })
-                .error(function(data, status, headers, config) {
-                    $scope.movie = data;
-                    //$("#msg").html()
-                });
-        }
+    //基于事件的监听
+    $scope.$on('editMovieEvent', function(e, data) {
+        $scope.movie = data;
+        $scope.getMovie();
+    });
 
+    //$scope.id = $scope.movie["_id"];
+    $scope.getMovie = function(){
+        $scope.id = $scope.movie["_id"];
+        if($scope.id && $scope.id!=""){
+            var para={"id":$scope.id};
+            $.ajax({
+                type: "GET",
+                url: '/movie/getMovie',
+                data: para,
+                success: function (data, textStatus){
+                    if(data){
+                        $scope.movie = data;
+                    }
+                    else{
+                        $("#msg").html("获取数据出错");
+                    }
+                }
+            });
+        }
     };
+    //提交
     $scope.submit = function(){
-        var strURL="/movie/add";
+        var strURL="/movie/addOrUpdate";
         //if($scope.id && $scope.id!=""){
         //    strURL="/movie/update"; //更新
         //}
@@ -149,26 +193,51 @@ app.controller('movieEditController', function($scope, $http) {
         //    strURL="/movie/add"; //新增
         //
         //}
-        $http({url: strURL, method: "POST",
-            params:{"content" : $scope.movie}
-        })
-            .success(function(data, status, headers, config) {
+        var data = {};
+        data.content = $scope.movie;
+        //$http({url: strURL, method: "POST",
+        //    params:data
+        //})
+        //    .success(function(data, status, headers, config) {
+        //        if(data.success){
+        //            if(data.data)
+        //                $scope.movie = data.data;
+        //            alert("保存成功");
+        //            //隐藏form
+        //            //$("#movieEditor").hide();
+        //            location.reload();
+        //        }
+        //        else{
+        //            $("#msg").html("保存出错");
+        //        }
+        //    })
+        //    .error(function(data, status, headers, config) {
+        //        //$scope.movie = data;
+        //        $("#msg").html("保存出错");
+        //    });
+        $.ajax({
+            type: "POST",
+            url: '/movie/addOrUpdate',
+            data: data,
+            success: function (data, textStatus){
                 if(data.success){
-                    if(data.data)
-                        $scope.movie = data.data;
-                    alert("保存成功");
-                    //隐藏form
-                    //$("#movieEditor").hide();
+                    $('#msg').html('成功保存!');
+                    //$('#msg').addClass('alert alert-success');
+                    //$(location).attr('href','/movie/'+mdata.name);
+                    location.reload();
+                } else {
+                    $('#msg').html(data.err);
+                    //$('#msg').addClass('alert alert-error');
                 }
-                else{
-                    $("#msg").html("保存出错");
-                }
-            })
-            .error(function(data, status, headers, config) {
-                //$scope.movie = data;
-                $("#msg").html("保存出错");
-            });
-        $scope.getMovie();
+            }
+        });
+
+        //$scope.getMovie();
+    };
+    //取消
+    $scope.cancel = function(){
+        $scope.movie={};
+        $("#movieEditor").hide(500);
     };
     $scope.getMovie();
 });
