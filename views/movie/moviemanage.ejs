@@ -1,0 +1,66 @@
+<%
+ var appName="movieManageApp";
+  %>
+<!--布局页-->
+<% include ../shared/_layout_angularjs %>
+<!--头部-->
+<% include ../shared/_layout_navbar.ejs %>
+
+<div class="container body-content">
+    <div class="jumbotron">
+        <h2>学习Mongodb增删改查</h2>
+        <p class="lead">
+
+        </p>
+        <p>
+            <a href="/" class="btn btn-primary btn-large">Learn more »</a>
+        </p>
+    </div>
+
+    <div class="row">
+        <p id="msg" style="color:red;">
+
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <a href="javascript:GetAllData();" class="btn btn-default">获取所有数据&raquo;</a>
+            <div id="divListAll"></div>
+        </div>
+    </div>
+    <!--电影列表查询-->
+    <div class="row">
+        <div class="col-md-12">
+
+            <% include ../movie/tables.ejs %>
+        </div>
+    </div>
+    <!--编辑电影信息-->
+    <div class="row">
+        <div class="col-md-12">
+
+            <% include ../movie/movieEdit.ejs %>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>插入JSON数据</h2>
+            <p>
+                <textarea id="c_editor" name="c_editor" class="span12" rows="10" style="width:400px;"></textarea>
+
+            </p>
+            <a id="c_save" href="javascript:insertData();" class="btn btn-default">插入数据&raquo;</a>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+<script src="/appjs/movie.js"></script>
+
+<!--底部-->
+<% include ../shared/_layout_footer.ejs  %>

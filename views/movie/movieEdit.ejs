@@ -1,0 +1,32 @@
+<!--电影编辑-->
+<form id="movieEditor" role="form" method="POST" ng-controller="movieEditController" >
+  <h2>编辑电影信息</h2>
+  <div class="form-group">
+    <label for="name">名称</label>
+    <input id="name" name="name" type="text" class="form-control" ng-model="movie.name" value=""
+           placeholder="请输入名称">
+  </div>
+  <div class="form-group">
+    <label for="publish">发布时间</label>
+    <input id="publish" name="publish" type="text" class="form-control" ng-model="movie.publish" value=""
+           placeholder="请输入发布时间">
+  </div>
+  <div class="form-group">
+    <label for="source">片源</label>
+    <textarea id="source" name="source" class="form-control" rows="3" value=""></textarea>
+  </div>
+  <div class="form-group">
+    <label for="alias">别名</label>
+    <textarea id="alias" name="alias" class="form-control" rows="2" value=""></textarea>
+  </div>
+  <!--<div class="checkbox">-->
+    <!--<label>-->
+      <!--<input type="checkbox"> 请打勾-->
+    <!--</label>-->
+  <!--</div>-->
+  <input type="button" class="btn btn-default" ng-click='submit()' value="提交" />
+</form>
+
+
+
+

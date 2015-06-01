@@ -1,0 +1,74 @@
+<div ng-controller="tableController"><hr>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        电影列表
+      </h3>
+      <br />
+      <div id="sortOptions" >
+        <table class="table">
+          <tr>
+            <td>
+              <input type="text" class="form-control" placeholder="片名" ng-model="contains" />
+            </td>
+            <td>
+              <input type="text" class="form-control" placeholder="每页行数" ng-model="pageSize" />
+
+            </td>
+            <td>
+              <label class="tableLabel">排序条件</label>
+              <select class="tableInput" ng-model="sortField" ng-options="field for field in sortFields"></select>
+            </td>
+            <td>
+              <input type="radio" ng-model="direction" value="asc"> Ascending
+              <input type="radio" ng-model="direction" value="desc"> Descending
+            </td>
+            <td>
+              <input class="findButton" type="button" value="查找" ng-click="find()" />
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+    <div class="panel-body">
+      <div>
+
+        <div id="tableContainer">
+          <table class="table table-condensed table-hover">
+            <!--<tr><th>Id</th>-->
+            <th>名称</th><th>发布时间</th><th>来源</th>
+            <th>内容</th><th>创建时间</th></tr>
+            <tr ng-repeat="movie in movies">
+              <!--<td>{{movie._id}}</td>-->
+              <td  style="min-width: 100px">{{movie.name}}</td>
+              <td>{{ movie.publish.replace("T","")}}</td>
+              <td class="text-ellipsis" style="max-width: 500px">
+                <small class="text-left" style="max-width: 500px">{{movie.source}}</small>
+              </td>
+              <td>
+                <small class="text-left" style="max-width: 500px">{{movie.alias}}</small>
+              </td>
+              <td>{{movie.create_date}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <input class="pageButton" type="button" value="上一页"
+             ng-click="prev()" />
+      <input class="pageButton" type="button" value="下一页"
+             ng-click="next()" />
+      <label class="tableLabel">Words {{pageSize*(pageIndex-1) + 1}} to {{skipEnd}}</label>
+      <hr>
+
+    </div>
+  </div>
+
+  <hr>
+
+</div>
+
+
+
