@@ -16,4 +16,9 @@ router.get('/login', function(req, res, next) {
   res.render('login', { title: '用户登录' });
 });
 
+//加载搜索
+var searchserver = require('../searchserver');
+
 module.exports = router;
+
+
