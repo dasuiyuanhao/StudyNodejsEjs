@@ -126,5 +126,17 @@ router.get('/getMovie', function(req, res, next) {
         return res.json(data);
     });
 });
+//删除并重建索引
+router.post('/DeletAndCreateAllIndex', function(req, res, next) {
+    var jsonData = {};
+    Movie.DeletAndCreateAllIndex(jsonData, function (err, data) {
+        if (err) {
+            res.send({'success': false, 'err': err});
+        } else {
+            res.send({'success': true, 'data': data});
+        }
+    });
+});
+
 
 module.exports = router;

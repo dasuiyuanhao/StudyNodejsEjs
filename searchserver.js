@@ -3,6 +3,9 @@
  */
 var elasticsearch = require('elasticsearch');
 
+//搜索索引名称，index参数
+var searchIndexName="mystore";
+
 // 使用默认配置连接到 localhost:9200
 var client = new elasticsearch.Client();
 
@@ -10,9 +13,9 @@ var client = new elasticsearch.Client();
 var client = elasticsearch.Client({
     hosts: [
         //'192.168.1.191:9200',
-        //'192.168.1.191:9300'
-        'localhost:9200',
-        'localhost:9300'
+        //'192.168.1.191:9200'
+        'http://localhost:9200/',
+        'http://localhost:9200/'
     ]
 });
 
@@ -32,25 +35,25 @@ client.ping({
  *Allow 404 responsesedit
  *Prevent 404 responses from being considered errors by telling the client to ignore them.
  */
-client.indices.delete({
-    index: 'test_index',
-    ignore: [404]
-}).then(function (body) {
-    // since we told the client to ignore 404 errors, the
-    // promise is resolved even if the index does not exist
-    console.log('index was deleted or never existed');
-}, function (error) {
-    // oh no!
-});
+//client.indices.delete({
+//    index: 'test_index',
+//    ignore: [404]
+//}).then(function (body) {
+//    // since we told the client to ignore 404 errors, the
+//    // promise is resolved even if the index does not exist
+//    console.log('index was deleted or never existed');
+//}, function (error) {
+//    // oh no!
+//});
 
 // 获取状态，参数可选，可以只传递一个回调
-client.cluster.health(function (err, resp) {
-    if (err) {
-        console.error(err.message);
-    } else {
-        console.dir(resp);
-    }
-});
+//client.cluster.health(function (err, resp) {
+//    if (err) {
+//        console.error(err.message);
+//    } else {
+//        console.dir(resp);
+//    }
+//});
 
 //// 建立索引
 //client.index({
@@ -82,18 +85,18 @@ client.cluster.health(function (err, resp) {
 //});
 
 
-client.search({
-    index: 'twitter',
-    type: 'tweets',
-    body: {
-        query: {
-            match: {
-                body: 'elasticsearch'
-            }
-        }
-    }
-}).then(function (resp) {
-    var hits = resp.hits.hits;
-}, function (err) {
-    console.trace(err.message);
-});
+//client.search({
+//    index: 'twitter',
+//    type: 'tweets',
+//    body: {
+//        query: {
+//            match: {
+//                body: 'elasticsearch'
+//            }
+//        }
+//    }
+//}).then(function (resp) {
+//    var hits = resp.hits.hits;
+//}, function (err) {
+//    console.trace(err.message);
+//});

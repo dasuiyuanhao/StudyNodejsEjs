@@ -309,3 +309,23 @@ app.directive('richDraggable', function($document, $window) {
     };
 });
 
+//删除并重建索引
+function DeletAndCreateAllIndex(){
+    if(confirm("确定要删除并重建所有索引")){
+        $.ajax({
+            type: "POST",
+            url: '/movie/DeletAndCreateAllIndex',
+            data: data,
+            success: function (data, textStatus){
+                if(data.success){
+                    //$('#msg').html('成功保存!');
+                    alert("执行成功！");
+                } else {
+                    //$('#msg').html(data.err);
+                    alert("执行失败！");
+                    $('#msg').html("执行失败！"+data.err);
+                }
+            }
+        });
+    }
+}

@@ -29,6 +29,10 @@ var Movie = mongodb.mongoose.model("Movie", MovieSchema);
 var MovieDAO = function(){};
 module.exports = new MovieDAO();
 
+//加载搜索客户端
+var searchserver = require('../searchserver');
+var indexTypeName="movies";
+
 //保存，新增或者更新
 MovieDAO.prototype.save = function(obj, callback) {
     if(obj._id){//update
@@ -119,5 +123,54 @@ MovieDAO.prototype.getMovie = function(id, callback) {
         callback(err, data);
     });
 
+};
+
+//删除并重建索引
+MovieDAO.prototype.DeletAndCreateAllIndex = function(obj, callback) {
+    var err=null;
+    var data={success:false};
+    if(searchserver){
+        //删除所有索引
+        searchserver.client.delete({
+            index: searchserver.searchIndexName,
+            type: indexTypeName,
+            //id: '1'
+            consistency:"all"
+        }, function (error, response) {
+            if(!error){
+                return callback(error,data);
+            }
+
+        });
+        //重建索引
+        this.getAll(function (err,data) {
+            if(data){
+                if(data.length>0){
+                    forEach(data,function(item,index){
+                        client.create({
+                            index: searchserver.searchIndexName,
+                            type: indexTypeName,
+                            id: item._id,
+                            body: {
+                                title: item.name,
+                                tags: ['y', 'z'],
+                                published: true,
+                                published_at: '2013-01-01',
+                                counter: 1
+                            }
+                        }, function (error, response) {
+                            // ...
+                        });
+                    });
+
+                }
+            }
+        });
+    }
+
+
+
+    err="执行失败";
+    return callback(err,data);
 };
 
