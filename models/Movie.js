@@ -128,7 +128,10 @@ MovieDAO.prototype.getMovie = function(id, callback) {
 //删除并重建索引
 MovieDAO.prototype.DeletAndCreateAllIndex = function(obj, callback) {
     var err=null;
-    var data={success:false};
+    var data={success:false,
+        indexCount:0
+    };
+
     if(searchserver){
         //删除所有索引
         searchserver.client.delete({
@@ -143,6 +146,7 @@ MovieDAO.prototype.DeletAndCreateAllIndex = function(obj, callback) {
 
         });
         //重建索引
+
         this.getAll(function (err,data) {
             if(data){
                 if(data.length>0){
@@ -153,21 +157,26 @@ MovieDAO.prototype.DeletAndCreateAllIndex = function(obj, callback) {
                             id: item._id,
                             body: {
                                 title: item.name,
-                                tags: ['y', 'z'],
+                                //tags: ['y', 'z'],
                                 published: true,
-                                published_at: '2013-01-01',
+                                published_at: item.publish,
                                 counter: 1
                             }
                         }, function (error, response) {
                             // ...
+                            if(!error){
+                                data.indexCount++;
+                            }
                         });
                     });
 
                 }
             }
         });
+        err=null;
+        data.success=true;
+        return callback(err,data);
     }
-
 
 
     err="执行失败";

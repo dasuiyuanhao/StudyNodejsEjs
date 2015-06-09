@@ -315,16 +315,24 @@ function DeletAndCreateAllIndex(){
         $.ajax({
             type: "POST",
             url: '/movie/DeletAndCreateAllIndex',
-            data: data,
+            data: null,
             success: function (data, textStatus){
                 if(data.success){
                     //$('#msg').html('成功保存!');
                     alert("执行成功！");
+                    $('#msg').html("执行成功！共索引条数"+data.indexCount);
                 } else {
                     //$('#msg').html(data.err);
                     alert("执行失败！");
                     $('#msg').html("执行失败！"+data.err);
                 }
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                // 通常 textStatus 和 errorThrown 之中
+                // 只有一个会包含信息
+                //this; // 调用本次AJAX请求时传递的options参数
+                alert("执行失败！");
+                $('#msg').html("执行失败！"+errorThrown + " <br/> " +XMLHttpRequest.responseText);
             }
         });
     }

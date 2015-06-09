@@ -14,10 +14,13 @@ var client = elasticsearch.Client({
     hosts: [
         //'192.168.1.191:9200',
         //'192.168.1.191:9200'
-        'http://localhost:9200/',
         'http://localhost:9200/'
+        //'http://localhost:9200/'
     ]
 });
+//调用
+//var instance = function(){};
+exports.client = client;
 
 client.ping({
     requestTimeout: 30000,
