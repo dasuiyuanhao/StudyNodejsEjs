@@ -27,6 +27,9 @@
               <input class="findButton" type="button" value="查找" ng-click="find()" />
             </td>
             <td></td>
+            <td>
+              <input class="findButton" type="button" value="全文检索" ng-click="fullTextSearch()" />
+            </td>
           </tr>
         </table>
       </div>
@@ -72,7 +75,7 @@
              ng-click="prev()" />
       <input class="pageButton" type="button" value="下一页"
              ng-click="next()" />
-      <label class="tableLabel">Words {{pageSize*(pageIndex-1) + 1}} to {{skipEnd}}</label>
+      <label class="tableLabel">第 {{pageSize*(pageIndex-1) + 1}} 到 {{skipEnd}} 个</label>
       <hr>
 
     </div>

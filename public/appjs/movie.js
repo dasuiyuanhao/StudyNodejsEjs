@@ -73,7 +73,7 @@ app.controller('bodyContentController', function($scope, $http) {
         $scope.$broadcast('editMovieEvent',data);
     });
 });
-
+//检索数据
 app.controller('tableController', function($scope, $http) {
     $scope.movies = [];
     $scope.contains = '';
@@ -83,6 +83,7 @@ app.controller('tableController', function($scope, $http) {
     $scope.sortFields = ['_id','name', 'publish'];
     $scope.sortField ="_id";
     $scope.direction = "asc";
+    //数据库中查询
     $scope.getMovies = function(){
         $http({url: '/movie/query', method: "GET",
             params:{ pageSize:$scope.pageSize,
@@ -141,6 +142,28 @@ app.controller('tableController', function($scope, $http) {
     };
 
     $scope.getMovies();
+
+    //全文检索
+    $scope.fullTextSearch=function(){
+        $scope.pageIndex = 1;
+        $scope.skipEnd = 0;
+        $http({url: '/movie/fullTextSearch', method: "GET",
+            params:{ pageSize:$scope.pageSize,
+                pageIndex:$scope.pageIndex,
+                sort:$scope.sortField,
+                direction:$scope.direction,
+                contains:$scope.contains }})
+            .success(function(data, status, headers, config) {
+                $scope.movies = data.results;
+                $scope.skipEnd = $scope.pageSize *($scope.pageIndex-1) + $scope.movies.length;
+            })
+            .error(function(data, status, headers, config) {
+                $scope.movies = [];
+                $scope.skipEnd = $scope.skip + $scope.movies.length;
+            });
+    };
+
+
 });
 
 //编辑内容
@@ -337,3 +360,5 @@ function DeleteAndCreateAllIndex(){
         });
     }
 }
+
+

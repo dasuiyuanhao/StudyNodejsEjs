@@ -199,3 +199,87 @@ MovieDAO.prototype.DeleteAndCreateAllIndex = function(obj, callback) {
 
 };
 
+/*
+ * 全文检索
+ * 条件、排序、分页
+ * 如果pageIndex小于1，则查询所有
+ * */
+MovieDAO.prototype.fullTextSearch = function(queryCondition,sort,pageIndex,pageSize, callback) {
+    //排序
+    //if(sort!=undefined && sort!=null){
+    //    query.sort(sort);
+    //}
+    //执行查询
+    //query.exec(function(err, data) {
+    //    callback(err, data);
+    //});
+    //查询条件
+    if(!queryCondition || queryCondition==""){
+        queryCondition="*";
+    }
+    var pageNum = pageIndex||1;
+    var perPage = pageSize || 5;
+    //var userQuery = request.param('search_query');
+    //var userId = request.session.userId;
+
+    //var param={
+    //    index: searchserver.searchIndexName,
+    //    type: indexTypeName,
+    //    from: (pageNum - 1) * perPage,
+    //    size: perPage,
+    //    body: {
+    //        query: {
+    //            filtered: {
+    //                query: {
+    //                    match: {
+    //                        // match the query agains all of
+    //                        // the fields in the posts index
+    //                        //_all: queryCondition
+    //                        title: queryCondition
+    //                    }
+    //                },
+    //                filter: {
+    //                    // only return documents that are
+    //                    // public or owned by the current user
+    //                    or: [
+    //                        {
+    //                            term: { privacy: "public" }
+    //                        }
+    //                        //{
+    //                        //    term: { owner: userId }
+    //                        //}
+    //                    ]
+    //                }
+    //            }
+    //        }
+    //    }};
+    var param={
+        index: searchserver.searchIndexName,
+        type: indexTypeName,
+        from: (pageNum - 1) * perPage,
+        size: perPage,
+        q: 'title:'+queryCondition
+    };
+    console.log(param);
+    searchserver.client.search(param,
+        function (error, response) {
+            if (error) {
+                // handle error
+                //return;
+            }
+
+            var returnData={
+                results: response.hits.hits,
+                page: pageNum,
+                pages: Math.ceil(response.hits.total / perPage)
+            };
+            return callback(error, returnData);
+
+            //response.render('search_results', {
+            //    results: response.hits.hits,
+            //    page: pageNum,
+            //    pages: Math.ceil(response.hits.total / perPage)
+            //})
+        });
+
+};

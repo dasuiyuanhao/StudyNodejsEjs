@@ -137,6 +137,30 @@ router.post('/DeleteAndCreateAllIndex', function(req, res, next) {
         }
     });
 });
-
+//全文检索
+router.get('/fullTextSearch', function(req, res) {
+    var sort = getSortObj(req);
+    var queryCondition = "";
+    if(req.query.contains.length > 0){
+        //queryCondition={'name' : new RegExp(req.query.contains, 'i')};
+        queryCondition=req.query.contains;
+    }
+    //分页
+    var pageIndex=1;
+    var pageSize=10;
+    if(req.query.pageIndex){
+        pageIndex=req.query.pageIndex;
+    }
+    if(req.query.pageSize){
+        pageSize=req.query.pageSize;
+    }
+    Movie.fullTextSearch(queryCondition,sort,pageIndex,pageSize,function(err,data){
+        if (!data){
+            res.json(404, {msg: '没有查询到结果'});
+        } else {
+            res.json(data);
+        }
+    });
+});
 
 module.exports = router;

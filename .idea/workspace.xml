@@ -87,9 +87,13 @@
         <entry file="file://$PROJECT_DIR$/routes/movie.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="135" column="54" selection-start-line="135" selection-start-column="54" selection-end-line="135" selection-end-column="54" />
+              <caret line="148" column="4" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
               <folding>
                 <element signature="e#1396#1988#0" expanded="false" />
+                <element signature="e#2048#2120#0" expanded="false" />
+                <element signature="e#2168#2817#0" expanded="false" />
+                <element signature="n#!!block;n#getSortObj#0" expanded="false" />
+                <element signature="e#3200#3383#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -98,21 +102,16 @@
       <file leaf-file-name="Movie.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/Movie.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334">
-              <caret line="173" column="36" selection-start-line="173" selection-start-column="36" selection-end-line="173" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.54901963">
+              <caret line="268" column="7" selection-start-line="268" selection-start-column="7" selection-end-line="268" selection-end-column="7" />
               <folding>
                 <element signature="e#857#2033#0" expanded="false" />
+                <element signature="e#2092#2244#0" expanded="false" />
+                <element signature="e#2379#3038#0" expanded="false" />
+                <element signature="e#3108#3279#0" expanded="false" />
+                <element signature="e#3361#5625#0" expanded="false" />
+                <element signature="e#5782#5786#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="moviemanage.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/movie/moviemanage.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.225806">
-              <caret line="69" column="93" selection-start-line="69" selection-start-column="93" selection-end-line="69" selection-end-column="93" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -121,7 +120,53 @@
         <entry file="file://$PROJECT_DIR$/public/appjs/movie.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="322" column="63" selection-start-line="322" selection-start-column="63" selection-end-line="322" selection-end-column="63" />
+              <caret line="161" column="68" selection-start-line="161" selection-start-column="68" selection-end-line="161" selection-end-column="68" />
+              <folding>
+                <element signature="e#445#1263#0" expanded="false" />
+                <element signature="n#!!block;n#GetAllData#0" expanded="false" />
+                <element signature="e#2280#2950#0" expanded="false" />
+                <element signature="e#2296#2550#0" expanded="false" />
+                <element signature="e#2980#3073#0" expanded="false" />
+                <element signature="e#3103#3287#0" expanded="false" />
+                <element signature="e#3317#3696#0" expanded="false" />
+                <element signature="e#3745#4109#0" expanded="false" />
+                <element signature="e#5007#7759#0" expanded="false" />
+                <element signature="e#7812#8436#0" expanded="false" />
+                <element signature="e#8476#8737#0" expanded="false" />
+                <element signature="e#8800#9787#0" expanded="false" />
+                <element signature="n#!!block;n#DeleteAndCreateAllIndex#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="moviemanage.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/movie/moviemanage.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.32258">
+              <caret line="65" column="50" selection-start-line="65" selection-start-column="50" selection-end-line="65" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fullTextSearch.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/movie/fullTextSearch.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="7" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tables.ejs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/movie/tables.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.903226">
+              <caret line="77" column="80" selection-start-line="77" selection-start-column="80" selection-end-line="77" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -179,17 +224,18 @@
         <option value="$PROJECT_DIR$/public/javascripts/Utility/UtilityTools.js" />
         <option value="$PROJECT_DIR$/schema/MovieSchema.js" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/ide/ide-scripting.js" />
-        <option value="$PROJECT_DIR$/views/movie/tables.ejs" />
         <option value="$PROJECT_DIR$/views/movie/movieEdit.ejs" />
         <option value="$PROJECT_DIR$/mongodb.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/common.js" />
-        <option value="$PROJECT_DIR$/routes/movie.js" />
-        <option value="$PROJECT_DIR$/views/movie/moviemanage.ejs" />
         <option value="$PROJECT_DIR$/searchserver.js" />
+        <option value="$PROJECT_DIR$/views/movie/moviemanage.ejs" />
+        <option value="$PROJECT_DIR$/views/movie/fullTextSearch.ejs" />
         <option value="$PROJECT_DIR$/public/appjs/movie.js" />
+        <option value="$PROJECT_DIR$/views/movie/tables.ejs" />
+        <option value="$PROJECT_DIR$/routes/movie.js" />
         <option value="$PROJECT_DIR$/models/Movie.js" />
       </list>
     </option>
@@ -260,6 +306,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StudyNodejsEjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StudyNodejsEjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="movie" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StudyNodejsEjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StudyNodejsEjs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -281,11 +359,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\GitHub\StudyNodejsEjs\views\movie" />
       <recent name="G:\StudyToDo\StudyNodejsEjs\public\javascripts" />
       <recent name="G:\StudyToDo\StudyNodejsEjs\public\javascripts\Utility" />
       <recent name="G:\StudyToDo\StudyNodejsEjs\public\javascripts\angularjs" />
       <recent name="G:\StudyToDo\StudyNodejsEjs\views\shared" />
-      <recent name="G:\StudyToDo\StudyNodejsEjs\views\movie" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\StudyToDo\StudyNodejsEjs" />
@@ -350,7 +428,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1050" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -389,16 +467,26 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/models/Movie.js</url>
-          <line>153</line>
-          <option name="timeStamp" value="43" />
+          <line>216</line>
+          <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/models/Movie.js</url>
-          <line>164</line>
-          <option name="timeStamp" value="49" />
+          <line>265</line>
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/routes/movie.js</url>
+          <line>141</line>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/routes/movie.js</url>
+          <line>148</line>
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="54" />
+      <option name="time" value="66" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -407,20 +495,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/mongoose/lib/error/cast.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/appjs/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07746479">
-          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19748653">
@@ -685,14 +759,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/movie/tables.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32175502">
-          <caret line="30" column="16" selection-start-line="8" selection-start-column="8" selection-end-line="30" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.076124564">
@@ -729,7 +795,7 @@
         <state vertical-scroll-proportion="0.006535948">
           <caret line="63" column="6" selection-start-line="63" selection-start-column="2" selection-end-line="63" selection-end-column="6" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -750,18 +816,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/jquery-1.10.2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="1941" column="4" selection-start-line="1941" selection-start-column="4" selection-end-line="1941" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/appjs/movie.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="322" column="63" selection-start-line="322" selection-start-column="63" selection-end-line="322" selection-end-column="63" />
-          <folding />
+          <caret line="161" column="68" selection-start-line="161" selection-start-column="68" selection-end-line="161" selection-end-column="68" />
+          <folding>
+            <element signature="e#445#1263#0" expanded="false" />
+            <element signature="n#!!block;n#GetAllData#0" expanded="false" />
+            <element signature="e#2280#2950#0" expanded="false" />
+            <element signature="e#2296#2550#0" expanded="false" />
+            <element signature="e#2980#3073#0" expanded="false" />
+            <element signature="e#3103#3287#0" expanded="false" />
+            <element signature="e#3317#3696#0" expanded="false" />
+            <element signature="e#3745#4109#0" expanded="false" />
+            <element signature="e#5007#7759#0" expanded="false" />
+            <element signature="e#7812#8436#0" expanded="false" />
+            <element signature="e#8476#8737#0" expanded="false" />
+            <element signature="e#8800#9787#0" expanded="false" />
+            <element signature="n#!!block;n#DeleteAndCreateAllIndex#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/movie/moviemanage.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.225806">
-          <caret line="69" column="93" selection-start-line="69" selection-start-column="93" selection-end-line="69" selection-end-column="93" />
+        <state vertical-scroll-proportion="-12.32258">
+          <caret line="65" column="50" selection-start-line="65" selection-start-column="50" selection-end-line="65" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/movie/fullTextSearch.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="7" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/movie/tables.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.903226">
+          <caret line="77" column="80" selection-start-line="77" selection-start-column="80" selection-end-line="77" selection-end-column="80" />
           <folding />
         </state>
       </provider>
@@ -769,19 +875,28 @@
     <entry file="file://$PROJECT_DIR$/routes/movie.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="135" column="54" selection-start-line="135" selection-start-column="54" selection-end-line="135" selection-end-column="54" />
+          <caret line="148" column="4" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
           <folding>
             <element signature="e#1396#1988#0" expanded="false" />
+            <element signature="e#2048#2120#0" expanded="false" />
+            <element signature="e#2168#2817#0" expanded="false" />
+            <element signature="n#!!block;n#getSortObj#0" expanded="false" />
+            <element signature="e#3200#3383#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/Movie.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="173" column="36" selection-start-line="173" selection-start-column="36" selection-end-line="173" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.54901963">
+          <caret line="268" column="7" selection-start-line="268" selection-start-column="7" selection-end-line="268" selection-end-column="7" />
           <folding>
             <element signature="e#857#2033#0" expanded="false" />
+            <element signature="e#2092#2244#0" expanded="false" />
+            <element signature="e#2379#3038#0" expanded="false" />
+            <element signature="e#3108#3279#0" expanded="false" />
+            <element signature="e#3361#5625#0" expanded="false" />
+            <element signature="e#5782#5786#0" expanded="false" />
           </folding>
         </state>
       </provider>
