@@ -3,37 +3,57 @@
  */
 var elasticsearch = require('elasticsearch');
 
-//搜索索引名称，index参数
-var searchIndexName="mystore";
+var SearchServerDAO = function(){
+    //搜索索引名称，index参数
+    this.searchIndexName="mystore";
 
-// 使用默认配置连接到 localhost:9200
-var client = new elasticsearch.Client();
+    // 使用默认配置连接到 localhost:9200
+    //this.client = new elasticsearch.Client();
 
-// 连接两个节点，负载均衡使用round-robin算法
-var client = elasticsearch.Client({
-    hosts: [
-        //'192.168.1.191:9200',
-        //'192.168.1.191:9200'
-        'http://localhost:9200/'
-        //'http://localhost:9200/'
-    ]
-});
+    // 连接两个节点，负载均衡使用round-robin算法
+    this.client = new elasticsearch.Client({
+        hosts: [
+            //'192.168.1.191:9200',
+            //'192.168.1.191:9200'
+            'http://localhost:9200/'
+            //'http://localhost:9200/'
+        ]
+    });
+
+    //忽略404
+    //this.client.indices.delete({
+    //    index: this.searchIndexName,
+    //    ignore: [404]
+    //}).then(function (body) {
+    //    // since we told the client to ignore 404 errors, the
+    //    // promise is resolved even if the index does not exist
+    //    console.log('index was deleted or never existed');
+    //}, function (error) {
+    //    // oh no!
+    //});
+
+    //测试连接
+    this.client.ping({
+        requestTimeout: 30000,
+
+        // undocumented params are appended to the query string
+        hello: "elasticsearch!"
+    }, function (error) {
+        if (error) {
+            console.error('elasticsearch cluster is down!');
+        } else {
+            console.log('All is well');
+        }
+    });
+};
+module.exports = new SearchServerDAO();
+
+
 //调用
 //var instance = function(){};
-exports.client = client;
+//exports.client = client;
 
-client.ping({
-    requestTimeout: 30000,
 
-    // undocumented params are appended to the query string
-    hello: "elasticsearch!"
-}, function (error) {
-    if (error) {
-        console.error('elasticsearch cluster is down!');
-    } else {
-        console.log('All is well');
-    }
-});
 /*
  *Allow 404 responsesedit
  *Prevent 404 responses from being considered errors by telling the client to ignore them.

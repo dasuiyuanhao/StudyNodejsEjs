@@ -127,9 +127,9 @@ router.get('/getMovie', function(req, res, next) {
     });
 });
 //删除并重建索引
-router.post('/DeletAndCreateAllIndex', function(req, res, next) {
+router.post('/DeleteAndCreateAllIndex', function(req, res, next) {
     var jsonData = {};
-    Movie.DeletAndCreateAllIndex(jsonData, function (err, data) {
+    Movie.DeleteAndCreateAllIndex(jsonData, function (err, data) {
         if (err) {
             res.send({'success': false, 'err': err});
         } else {

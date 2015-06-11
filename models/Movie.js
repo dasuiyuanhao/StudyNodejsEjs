@@ -126,60 +126,76 @@ MovieDAO.prototype.getMovie = function(id, callback) {
 };
 
 //删除并重建索引
-MovieDAO.prototype.DeletAndCreateAllIndex = function(obj, callback) {
+MovieDAO.prototype.DeleteAndCreateAllIndex = function(obj, callback) {
     var err=null;
-    var data={success:false,
+    var backData={
+        success:false,
         indexCount:0
     };
-
+    var daoInstance=this;
+    //var Q = require("q");
     if(searchserver){
         //删除所有索引
-        searchserver.client.delete({
+        searchserver.client.indices.delete({
             index: searchserver.searchIndexName,
             type: indexTypeName,
-            //id: '1'
-            consistency:"all"
+            //id: '1',
+            //q:"*",
+            consistency:"all",
+            ignore: [404]
         }, function (error, response) {
-            if(!error){
-                return callback(error,data);
+            if(error){
+                return callback(error.message,backData);
             }
+            else{
+                //重建索引
+                daoInstance.getAll(function (err,data) {
 
-        });
-        //重建索引
+                    if(data){
+                        if(data.length>0){
+                            var indexItem=0;
+                            data.forEach(function(item){
+                                indexItem++;
+                                var itemId=indexItem;
+                                searchserver.client.index({
+                                    index: searchserver.searchIndexName,
+                                    type: indexTypeName,
+                                    id: itemId,
+                                    body: {
+                                        //_id:item._id,
+                                        title: item.name,
+                                        //tags: ['y', 'z'],
+                                        published: true,
+                                        published_at: item.publish,
+                                        counter: 1
+                                    }
+                                }, function (error, response) {
+                                    // ...
+                                    if(!error){
+                                        backData.indexCount++;
+                                    }
+                                });
+                            });
 
-        this.getAll(function (err,data) {
-            if(data){
-                if(data.length>0){
-                    forEach(data,function(item,index){
-                        client.create({
-                            index: searchserver.searchIndexName,
-                            type: indexTypeName,
-                            id: item._id,
-                            body: {
-                                title: item.name,
-                                //tags: ['y', 'z'],
-                                published: true,
-                                published_at: item.publish,
-                                counter: 1
-                            }
-                        }, function (error, response) {
-                            // ...
-                            if(!error){
-                                data.indexCount++;
-                            }
-                        });
-                    });
+                        }
+                    }
 
-                }
+                    backData.success=true;
+                    return callback(err,backData);
+
+                });
             }
         });
-        err=null;
-        data.success=true;
-        return callback(err,data);
+
+        //err=null;
+        //backData.success=true;
+        //return callback(err,backData);
     }
 
 
-    err="执行失败";
-    return callback(err,data);
+    //err="执行失败";
+    //return callback(err,backData);
+
+
 };
 

@@ -310,11 +310,11 @@ app.directive('richDraggable', function($document, $window) {
 });
 
 //删除并重建索引
-function DeletAndCreateAllIndex(){
+function DeleteAndCreateAllIndex(){
     if(confirm("确定要删除并重建所有索引")){
         $.ajax({
             type: "POST",
-            url: '/movie/DeletAndCreateAllIndex',
+            url: '/movie/DeleteAndCreateAllIndex',
             data: null,
             success: function (data, textStatus){
                 if(data.success){
