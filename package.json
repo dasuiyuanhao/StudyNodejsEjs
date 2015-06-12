@@ -23,7 +23,8 @@
     "q": "*",
     "elasticsearch": "*",
     "moment": "*",
-    "node-schedule": "*"
+    "node-schedule": "*",
+    "nodemailer-smtp-transport": "*"
 
   }
 }

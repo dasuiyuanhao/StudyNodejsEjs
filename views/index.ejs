@@ -41,9 +41,47 @@
         </div>
     </div>
 
+    <div class="row">
+        <input type="button" value="发送邮件" onclick="SendEmailTest();" class="btn btn-default" />
+    </div>
+
 
 
 </div>
 
 <!--底部-->
 <% include shared/_layout_footer.ejs  %>
+
+<script type="text/javascript">
+    var isSendingEmail=false;
+    function SendEmailTest(){
+        if(isSendingEmail){
+            alert("邮件正在发送中...");
+        }
+        else{
+            isSendingEmail=true;
+            $.ajax({
+                type: "POST",
+                url: '/sendemail',
+                data: null,
+                success: function (data, textStatus){
+                    if(data.success){
+                        alert("执行成功！");
+                    } else {
+                        alert("执行失败！");
+                        //$('#msg').html("执行失败！"+data.err);
+                    }
+                    isSendingEmail=false;
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    // 通常 textStatus 和 errorThrown 之中
+                    // 只有一个会包含信息
+                    //this; // 调用本次AJAX请求时传递的options参数
+                    alert("执行失败！");
+                    isSendingEmail=false;
+                }
+            });
+        }
+
+    }
+</script>
