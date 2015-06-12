@@ -361,4 +361,7 @@ function DeleteAndCreateAllIndex(){
     }
 }
 
+//全文搜索Controller
+app.controller('fullTextSearchController', function($scope, $http) {
 
+});
