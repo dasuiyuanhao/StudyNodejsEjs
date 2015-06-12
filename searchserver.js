@@ -42,7 +42,7 @@ var SearchServerDAO = function(){
         if (error) {
             console.error('elasticsearch cluster is down!');
         } else {
-            console.log('All is well');
+            console.log('elasticsearch服务连接正常！');
         }
     });
 };

@@ -22,7 +22,8 @@
     "validator": "*",
     "q": "*",
     "elasticsearch": "*",
-    "moment": "*"
+    "moment": "*",
+    "node-schedule": "*"
 
   }
 }
