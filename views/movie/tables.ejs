@@ -52,12 +52,14 @@
               <tr ng-repeat="movie in movies">
               <!--<td>{{movie._id}}</td>-->
               <td  style="min-width: 100px">{{movie.name}}</td>
-              <td>{{ movie.publish.replace("T","")}}</td>
-              <td class="text-ellipsis" style="max-width: 500px">
+              <td>{{ movie.publish.replace("T"," ")}}</td>
+              <td class="text-ellipsis" style="max-width: 500px" title="{{movie.source}}">
                 <small class="text-left" style="max-width: 500px">{{movie.source}}</small>
               </td>
-              <td>
-                <small class="text-left" style="max-width: 500px">{{movie.alias}}</small>
+              <td >
+                <small class="text-left" style="max-width: 500px" >
+                  {{movie.alias}}
+                </small>
               </td>
               <td>{{movie.create_date}}</td>
                 <td>

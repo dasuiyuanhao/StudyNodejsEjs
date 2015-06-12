@@ -21,7 +21,8 @@
     "stylus": "*",
     "validator": "*",
     "q": "*",
-    "elasticsearch": "*"
+    "elasticsearch": "*",
+    "moment": "*"
 
   }
 }

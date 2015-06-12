@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2015/5/26.
  */
+var common=require('../common');
 var mongodb = require('../mongodb');
 var Schema = mongodb.mongoose.Schema;
 
@@ -26,7 +27,9 @@ var MovieSchema = new Schema({
 });
 
 var Movie = mongodb.mongoose.model("Movie", MovieSchema);
-var MovieDAO = function(){};
+var MovieDAO = function(){
+
+};
 module.exports = new MovieDAO();
 
 //加载搜索客户端
@@ -125,7 +128,10 @@ MovieDAO.prototype.getMovie = function(id, callback) {
 
 };
 
-//删除并重建索引
+
+/*
+ * 删除并重建索引
+ * */
 MovieDAO.prototype.DeleteAndCreateAllIndex = function(obj, callback) {
     var err=null;
     var backData={
@@ -133,6 +139,8 @@ MovieDAO.prototype.DeleteAndCreateAllIndex = function(obj, callback) {
         indexCount:0
     };
     var daoInstance=this;
+    //日期时间工具
+    var moment = require('moment');
     //var Q = require("q");
     if(searchserver){
         //删除所有索引
@@ -160,15 +168,18 @@ MovieDAO.prototype.DeleteAndCreateAllIndex = function(obj, callback) {
                                 searchserver.client.index({
                                     index: searchserver.searchIndexName,
                                     type: indexTypeName,
-                                    id: itemId,
-                                    body: {
-                                        //_id:item._id,
-                                        title: item.name,
-                                        //tags: ['y', 'z'],
-                                        published: true,
-                                        published_at: item.publish,
-                                        counter: 1
-                                    }
+                                    id: item._id +"", //itemId,
+                                    //body: {
+                                    //    //_id:item._id,
+                                    //    title: item.name,
+                                    //    //tags: ['y', 'z'],
+                                    //    published: true,
+                                    //    published_at: moment().format(),
+                                    //    counter: 1,
+                                    //    //内容
+                                    //    publish:item.publish
+                                    //}
+                                    body:item
                                 }, function (error, response) {
                                     // ...
                                     if(!error){
@@ -258,7 +269,12 @@ MovieDAO.prototype.fullTextSearch = function(queryCondition,sort,pageIndex,pageS
         type: indexTypeName,
         from: (pageNum - 1) * perPage,
         size: perPage,
-        q: 'title:'+queryCondition
+        sort : [ //排序字段
+            //{"_id" : "asc"}
+            //{"name":"desc"}
+        ],
+        //q: 'title:'+queryCondition //不限字段的检索
+        q: ''+queryCondition
     };
     console.log(param);
     searchserver.client.search(param,
@@ -267,11 +283,21 @@ MovieDAO.prototype.fullTextSearch = function(queryCondition,sort,pageIndex,pageS
                 // handle error
                 //return;
             }
-
+            //整理结果集
+            var total=0;
+            var contentHits=[];
+            if(response.hits && response.hits.hits){
+                total=response.hits.total;
+                if(response.hits.hits.length>0){
+                    response.hits.hits.forEach(function(item){
+                        contentHits.push(item._source);
+                    });
+                }
+            }
             var returnData={
-                results: response.hits.hits,
+                results: contentHits,
                 page: pageNum,
-                pages: Math.ceil(response.hits.total / perPage)
+                pages: Math.ceil(total / perPage)
             };
             return callback(error, returnData);
 

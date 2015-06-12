@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+//公用
+//var common =require('common');
 
 
 var app = express();
@@ -24,6 +25,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+
+//使用公用
+//app.use(common());
 
 //加载路由
 var routes = require('./routes');
