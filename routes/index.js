@@ -25,9 +25,37 @@ var searchserver = require('../searchserver');
 var emailSender=require('../services/EmailSender');
 router.post('/sendemail', function(req, res, next) {
   var backData = {'success': false, 'err': null};
+  var jsonData = {};
+  //jsonData =new Object(req.body.content) ;
+  jsonData = req.body;
+  if(!jsonData.emailContent || jsonData.emailContent==="" || !jsonData.emailTo || jsonData.emailTo==""){
+    return res.send(backData);
+  }
+
+  //发送配置
+  var mailOptions = {
+    //to: 'dasuiyuanhao@sina.com, dasuiyuanhao@126.com', // list of receivers
+    to:jsonData.emailTo,
+    //subject: 'Hello ✔', // Subject line
+    subject: "学习NodeJS测试", // Subject line
+    //text: 'Hello world ✔', // plaintext body
+    //html: '<b>Hello world ✔</b>' // html body
+    html:jsonData.emailContent
+  };
+
   var emailSender=require('../services/EmailSender');
   //var emailS=new emailSender();
-  emailSender.sendEmail();
+  emailSender.sendEmail(mailOptions,function(err,data){
+      if (err) {
+        backData.success=false;
+        backData.err=err;
+        return res.send(backData);
+      } else {
+        backData.success=true;
+        backData.data=data;
+        return res.send(backData);
+      }
+  });
   //Movie.DeleteAndCreateAllIndex(jsonData, function (err, data) {
   //  if (err) {
   //    res.send({'success': false, 'err': err});
@@ -35,8 +63,7 @@ router.post('/sendemail', function(req, res, next) {
   //    res.send({'success': true, 'data': data});
   //  }
   //});
-  backData.success=true;
-  res.send(backData);
+
 });
 
 module.exports = router;

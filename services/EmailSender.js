@@ -4,6 +4,8 @@
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
+var util = require('util');
+
 // create reusable transporter object using SMTP transport
 var emailOption={
     host: 'smtp.163.com',
@@ -15,8 +17,7 @@ var emailOption={
     }
 };
 var smtpT=smtpTransport(emailOption);
-var transporter = nodemailer.createTransport(smtpT);
-console.log("邮箱连接成功");
+
 
 //方法入口
 var emailSender=function(){
@@ -24,27 +25,51 @@ var emailSender=function(){
     // NB! No need to recreate the transporter object. You can use
     // the same transporter object for all e-mails
 
-    var fromContent='木质纯 ✔ <'+emailOption.auth.user+'>';
+    this.transporter = nodemailer.createTransport(smtpT);
+    console.log("邮箱连接成功");
 
-    //发送邮件
+    /**
+     * 发送邮件
+     * 参数obj{to:"发给谁？",subject:"主题",content:"发送内容"}
+     */
     this.sendEmail=function(obj, callback){
+        var backError=null;
+        var backData=null;
+        //检查发送参数
+        var checkForSend=false;
+        if(obj){
+            if(!util.isNullOrUndefined(obj.to) && obj.to!="" && !util.isNullOrUndefined(obj.html) && obj.html!=""){
+                checkForSend=true;
+            }
+        }
+        if(checkForSend===false){
+            backError="发送参数缺失";
+            return callback(backError,backData);
+        }
+        //var contentHtml="<b>Hello world ✔</b>";
+
+        var fromContent='木质纯 ✔ <'+emailOption.auth.user+'>';
         // setup e-mail data with unicode symbols
         var mailOptions = {
             //from: '木质纯 ✔ <dasuiyuanhao@163.com>', // sender address
             from: fromContent,
-            to: 'dasuiyuanhao@sina.com, dasuiyuanhao@126.com', // list of receivers
-            subject: 'Hello ✔', // Subject line
-            text: 'Hello world ✔', // plaintext body
-            html: '<b>Hello world ✔</b>' // html body
+            //to: 'dasuiyuanhao@sina.com, dasuiyuanhao@126.com', // list of receivers
+            to:obj.to,
+            //subject: 'Hello ✔', // Subject line
+            subject: obj.subject, // Subject line
+            //text: 'Hello world ✔', // plaintext body
+            //html: '<b>Hello world ✔</b>' // html body
+            html:obj.html
         };
 
         // send mail with defined transport object
-        transporter.sendMail(mailOptions, function(error, info){
+        this.transporter.sendMail(mailOptions, function(error, info){
             if(error){
                 console.log(error);
             }else{
                 console.log('Message sent: ' + info.response);
             }
+            return callback(error,info);
         });
     };
 

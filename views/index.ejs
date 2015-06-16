@@ -42,6 +42,14 @@
     </div>
 
     <div class="row">
+        <div class="form-group">
+            <label for="name">发送给：</label>
+            <input id="emailTo" name="emailTo" type="text" class="form-control"  value="dasuiyuanhao@sina.com"  placeholder="电子邮箱地址">
+        </div>
+        <div class="form-group">
+            <label for="name">邮件内容：</label>
+            <input id="emailContent" name="emailContent" type="text" class="form-control"  value="测试"  placeholder="邮件内容">
+        </div>
         <input type="button" value="发送邮件" onclick="SendEmailTest();" class="btn btn-default" />
     </div>
 
@@ -59,11 +67,20 @@
             alert("邮件正在发送中...");
         }
         else{
+            var sendData={};
+            sendData.emailContent=$("#emailContent").val();
+            sendData.emailTo=$("#emailTo").val();
+            if(sendData.emailContent=="" || sendData.emailTo==""){
+                alert("请输入发件人和邮件内容");
+                return false;
+
+            }
+
             isSendingEmail=true;
             $.ajax({
                 type: "POST",
                 url: '/sendemail',
-                data: null,
+                data: sendData,
                 success: function (data, textStatus){
                     if(data.success){
                         alert("执行成功！");
